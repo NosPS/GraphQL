@@ -1,0 +1,26 @@
+{
+  "name": "graphql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@truffle/hdwallet-provider": "^2.0.9",
+    "ethjs": "^0.4.0",
+    "express": "^4.18.1",
+    "express-graphql": "^0.12.0",
+    "graphql": "^15.8.0",
+    "graphql-playground-middleware-express": "^1.7.23",
+    "graphql-yoga": "^2.10.0",
+    "nodemon": "^2.0.18",
+    "uuid": "^8.3.2",
+    "web3": "^1.7.4",
+    "web3-eth": "^1.7.4"
+  }
+}
