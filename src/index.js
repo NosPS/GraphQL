@@ -8,6 +8,8 @@ const expressPlayground = require("graphql-playground-middleware-express").defau
 // Create a context for holding contextual data 
 
 const app = express();
+const cors = require('cors');
+app.use(cors());
 
 app.use('/graphql', graphqlHTTP({
     schema: schema,
