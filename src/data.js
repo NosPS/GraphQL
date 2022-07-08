@@ -1,5 +1,9 @@
 const nfts = [];
+const logs = [];
+const findLogsByTokenId = [];
 
 module.exports = {
-    nfts
+    nfts,
+    logs,
+    findLogsByTokenId
   };
