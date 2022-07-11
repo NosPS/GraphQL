@@ -39,7 +39,7 @@ const resolvers = {
             nft.price = price;
         }
 
-        if (isListing) {
+        if (isListing !== null) {
             nft.isListing = isListing;
         }
 

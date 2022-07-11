@@ -62,20 +62,20 @@ async function init() {
         //         }
         //     });
 
-        // for (let i = 1208; i <= 1357; i++) {
+        // for (let i = 1; i <= 1357; i++) {
         //     var _id;
 
         //     if (i < 10) {
-        //         _id = "0406000" + i;
+        //         _id = "406000" + i;
         //     }
         //     else if (i > 9 && i < 100) {
-        //         _id = "040600" + i
+        //         _id = "40600" + i
         //     }
         //     else if (i > 99 && i < 1000) {
-        //         _id = "04060" + i
+        //         _id = "4060" + i
         //     }
         //     else if (i > 999 && i < 10000) {
-        //         _id = "0406" + i
+        //         _id = "406" + i
         //     }
 
         //     await token.ownerOf(_id).then((owner) => {
