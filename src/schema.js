@@ -3,7 +3,7 @@ const { buildSchema } = require("graphql");
 const schema = buildSchema(`
 type Query {
     nfts: [NFT!]!
-    findNFT(tokenId: ID!): NFT!
+    findNFT(tokenId: ID!): [NFT!]!
     logs: [LOG!]!
     findLOG(tokenId: ID!): [LOG!]!
 }

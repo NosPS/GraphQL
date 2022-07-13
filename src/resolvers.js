@@ -6,7 +6,7 @@ const resolvers = {
         return data.nfts;
     },
     findNFT: ({ tokenId }) => {
-        const nft = data.nfts.find((nft) => nft.tokenId == tokenId);
+        const nft = data.nfts.filter((nft) => nft.tokenId.includes(tokenId));
         return nft;
     },
     addNFT: ({ tokenId, owner, uri, price, isListing }) => {
