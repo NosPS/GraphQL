@@ -28,39 +28,39 @@ async function init() {
 
         var selectDB = result.db("Land");
 
-        nftContract.getPastEvents('Transfer', {
-            fromBlock: '4352970',
-            toBlock: 'latest'
-        }, function (error, events) { console.log(events); })
-            .then(async function (events) {
-                nftLogs = events;
-                console.log(nftLogs);
+        // nftContract.getPastEvents('Transfer', {
+        //     fromBlock: '4352970',
+        //     toBlock: 'latest'
+        // }, function (error, events) { console.log(events); })
+        //     .then(async function (events) {
+        //         nftLogs = events;
+        //         console.log(nftLogs);
 
-                for (let i = 0; i < nftLogs.length; i++) {
-                    await eth.getTransactionByHash(nftLogs[i].transactionHash).then(async (result) => {
-                        let arr = result.value.toArray();
-                        let hex = web3.utils.bytesToHex(arr);
-                        let str = web3.utils.hexToNumberString(hex);
-                        let price = str;
-                        let timestamp = (await web3.eth.getBlock(nftLogs[i].blockNumber)).timestamp
+        //         for (let i = 0; i < nftLogs.length; i++) {
+        //             await eth.getTransactionByHash(nftLogs[i].transactionHash).then(async (result) => {
+        //                 let arr = result.value.toArray();
+        //                 let hex = web3.utils.bytesToHex(arr);
+        //                 let str = web3.utils.hexToNumberString(hex);
+        //                 let price = str;
+        //                 let timestamp = (await web3.eth.getBlock(nftLogs[i].blockNumber)).timestamp
 
-                        if (nftLogs[i].event === 'Transfer') {
-                            let text = JSON.stringify(nftLogs[i].returnValues);
-                            let obj = JSON.parse(text)
-                            console.log("Transaction Hash : " + nftLogs[i].transactionHash);
-                            console.log("Block Number : " + nftLogs[i].blockNumber);
-                            console.log("From : " + obj.from);
-                            console.log("To : " + obj.to);
-                            console.log("Token ID : " + obj.tokenId);
-                            console.log("Price : " + price)
-                            console.log("Timestamp : " + timestamp);
+        //                 if (nftLogs[i].event === 'Transfer') {
+        //                     let text = JSON.stringify(nftLogs[i].returnValues);
+        //                     let obj = JSON.parse(text)
+        //                     console.log("Transaction Hash : " + nftLogs[i].transactionHash);
+        //                     console.log("Block Number : " + nftLogs[i].blockNumber);
+        //                     console.log("From : " + obj.from);
+        //                     console.log("To : " + obj.to);
+        //                     console.log("Token ID : " + obj.tokenId);
+        //                     console.log("Price : " + price)
+        //                     console.log("Timestamp : " + timestamp);
 
-                            AddLogs(selectDB, nftLogs[i].blockNumber, nftLogs[i].transactionHash, obj.tokenId, obj.from, obj.to, price, timestamp);
-                        }
-                        console.log(i);
-                    })
-                }
-            });
+        //                     AddLogs(selectDB, nftLogs[i].blockNumber, nftLogs[i].transactionHash, obj.tokenId, obj.from, obj.to, price, timestamp);
+        //                 }
+        //                 console.log(i);
+        //             })
+        //         }
+        //     });
 
         // for (let i = 1; i <= 1357; i++) {
         //     var _id;
@@ -96,8 +96,8 @@ async function init() {
         //     console.log(_id);
         // }
 
-        // NFTs(selectDB);
-        // Logs(selectDB);
+        NFTs(selectDB);
+        Logs(selectDB);
     });
 
     var AddNfts = async (db, id, owner, uri, price, isListing) => {
