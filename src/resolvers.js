@@ -127,6 +127,31 @@ const resolvers = {
         const deletedLOG = data.logs.splice(index, 1);
 
         return deletedLOG[0];
+    },
+    register: ({ email, password }) => {
+        const user = data.auth.find((user) => user.email == email);
+        if (!user) {
+            data.auth.push({ email: email, password: password });
+            database.Register(email, password);
+            return { message: "Success." };
+        }
+        else {
+            return { message: "Email has exist." };
+        }
+    },
+    login: ({ email, password }) => {
+        const user = data.auth.find((user) => user.email == email);
+        if (user) {
+            if (user.password === password) {
+                return { message: "Success." };
+            }
+            else {
+                return { message: "Wrong password." };
+            }
+        }
+        else {
+            return { message: "Wrong email." };
+        }
     }
 };
 

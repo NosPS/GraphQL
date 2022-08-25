@@ -98,6 +98,7 @@ async function init() {
 
         NFTs(selectDB);
         Logs(selectDB);
+        Auth(selectDB);
     });
 
     var AddNfts = async (db, id, owner, uri, price, isListing) => {
@@ -184,6 +185,13 @@ async function init() {
         db.collection("logs").find().toArray(async (err, result) => {
             data.logs = result;
             console.log(data.logs);
+        })
+    }
+
+    var Auth = async (db) => {
+        db.collection("auth").find().toArray(async (err, result) => {
+            data.auth = result;
+            console.log(data.auth);
         })
     }
 }
@@ -278,8 +286,78 @@ function DBAddLOG(blockNumber, transactionHash, tokenId, from, to, price, timest
     });
 }
 
+async function Register(email, password) {
+    mongo.connect(url, { useUnifiedTopology: true }, (err, result) => {
+        if (err) throw err;
+
+        console.log("Data connected.");
+
+        var selectDB = result.db("Land");
+
+        var newData = {
+            email,
+            password
+        }
+
+        var query = {
+            email
+        }
+        selectDB.collection("auth").find(query).toArray((err, result) => {
+            if (err) {
+                console.log(err);
+            }
+            else {
+                if (result.length > 0) {
+                    console.log("Email has exist.");
+                }
+                else {
+                    selectDB.collection("auth").insertOne(newData, (err, result) => {
+                        if (err) {
+                            console.log(err);
+                        }
+                        else {
+                            console.log("Success.");
+                        }
+                    })
+                }
+            }
+        })
+    });
+}
+
+function Login(email, password) {
+    mongo.connect(url, { useUnifiedTopology: true }, (err, result) => {
+        if (err) throw err;
+
+        console.log("Data connected.");
+
+        var selectDB = result.db("Land");
+
+        var query = {
+            email
+        }
+        selectDB.collection("auth").find(query).toArray(async (err, result) => {
+            if (err) {
+                return { message: err }
+            }
+            else {
+                if (result.length > 0) {
+                    if (result.password === password) {
+                        return { message: "Success." }
+                    }
+                }
+                else {
+                    return { message: "Couldn't find email." }
+                }
+            }
+        })
+    });
+}
+
 module.exports = {
     init,
     DBUpdateNFT,
-    DBAddLOG
+    DBAddLOG,
+    Register,
+    Login
 };

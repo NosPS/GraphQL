@@ -6,6 +6,11 @@ type Query {
     findNFT(tokenId: ID!): [NFT!]!
     logs: [LOG!]!
     findLOG(tokenId: ID!): [LOG!]!
+    login(email: String!, password: String!): AuthCallBack!
+}
+
+type AuthCallBack {
+    message: String!
 }
 
 type NFT {
@@ -33,6 +38,7 @@ type Mutation {
     addLOG(blockNumber: Int!, transactionHash: String!, tokenId: ID!, from: String!, to: String!, price: String!, timestamp: Int!): [LOG!]!
     updateLOG(blockNumber: Int, transactionHash: String!, tokenId: ID, from: String, to: String, price: String, timestamp: Int): LOG!
     deleteLOG(transactionHash: String!): LOG!
+    register(email: String!, password: String!): AuthCallBack!
 }
 `);
 
